@@ -1,4 +1,4 @@
-# hackathon-error-404
+# Team Name: error-404
 BYLD Hackathon 8th Feb 2024
 
 Read Me:
