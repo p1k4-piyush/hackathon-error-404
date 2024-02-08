@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat Translator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot Interface</title>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            height: 80vh;
+            box-sizing: border-box;
+            /* background-color: #e6d4d4; */
+        }
+
+        #chatbox {
+            width: 80%;
+            height: 70%;
+            border: 1px solid #060606;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            background-color: #BFD8AF;
+            border-radius: 20px;
+            
+            
+        }
+
+        #userInput {
+            width: 80%;
+            padding: 10px;
+            border-radius: 20px;
+            padding: 10px   ;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        /* .userMessage {
+            align-self: flex-end;
+            text-align: right;
+            font-size: 20px;
+            background-color: #ffffff;
+
+        } */
+        .userMessage {
+            align-self: flex-end;
+            text-align: right;
+            font-size: 20px;
+            background-color: #ffffff;
+            border-width: 20px;
+            border-radius: 20px;
+            padding:8px;
+            }
+
+        .userMessage-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            }
+       
+
+        .botMessage {
+            align-self: flex-start;
+            text-align: left;
+            font-size: 20px;
+            color:#ffffff;
+            background-color: #000000;
+            border-radius: 20px;
+            padding:8px;
+
+        
+        }
+    </style>
+</head>
+<body>
+    <label for="variable-menu"><b><h>Select Language :</b></h></label>
+    <select id="variable-menu" onchange="changeVariable(this.value)">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="german">German</option>
+        <option value="af">Afrikaans</option>
+        <option value="am">Amharic</option>
+        <option value="ar">Arabic</option>
+        <option value="az">Azerbaijani</option>
+        <option value="be">Belarusian</option>
+        <option value="bg">Bulgarian</option>
+        <option value="bn">Bengali</option>
+        <option value="bs">Bosnian</option>
+        <option value="ca">Catalan</option>
+        <option value="ceb">Cebuano</option>
+        <option value="co">Corsican</option>
+        <option value="cs">Czech</option>
+        <option value="cy">Welsh</option>
+        <option value="da">Danish</option>
+        <option value="de">German</option>
+        <option value="el">Greek</option>
+        <option value="en">English</option>
+        <option value="eo">Esperanto</option>
+        <option value="es">Spanish</option>
+        <option value="et">Estonian</option>
+        <option value="eu">Basque</option>
+        <option value="fa">Persian</option>
+        <option value="fi">Finnish</option>
+        <option value="fr">French</option>
+        <option value="fy">Frisian</option>
+        <option value="ga">Irish</option>
+        <option value="gd">Scots gaelic</option>
+        <option value="gl">Galician</option>
+        <option value="gu">Gujarati</option>
+        <option value="ha">Hausa</option>
+        <option value="haw">Hawaiian</option>
+        <option value="iw">Hebrew</option>
+        <option value="hi">Hindi</option>
+        <option value="hmn">Hmong</option>
+        <option value="hr">Croatian</option>
+        <option value="ht">Haitian creole</option>
+        <option value="hu">Hungarian</option>
+        <option value="hy">Armenian</option>
+        <option value="id">Indonesian</option>
+        <option value="ig">Igbo</option>
+        <option value="is">Icelandic</option>
+        <option value="it">Italian</option>
+        <option value="ja">Japanese</option>
+        <option value="jw">Javanese</option>
+        <option value="ka">Georgian</option>
+        <option value="kk">Kazakh</option>
+        <option value="km">Khmer</option>
+        <option value="kn">Kannada</option>
+        <option value="ko">Korean</option>
+        <option value="ku">Kurdish (kurmanji)</option>
+        <option value="ky">Kyrgyz</option>
+        <option value="la">Latin</option>
+        <option value="lb">Luxembourgish</option>
+        <option value="lo">Lao</option>
+        <option value="lt">Lithuanian</option>
+        <option value="lv">Latvian</option>
+        <option value="mg">Malagasy</option>
+        <option value="mi">Maori</option>
+        <option value="mk">Macedonian</option>
+        <option value="ml">Malayalam</option>
+        <option value="mn">Mongolian</option>
+        <option value="mr">Marathi</option>
+        <option value="ms">Malay</option>
+        <option value="mt">Maltese</option>
+        <option value="my">Myanmar (burmese)</option>
+        <option value="ne">Nepali</option>
+        <option value="nl">Dutch</option>
+        <option value="no">Norwegian</option>
+        <option value="ny">Chichewa</option>
+        <option value="or">Odia</option>
+        <option value="pa">Punjabi</option>
+        <option value="pl">Polish</option>
+        <option value="ps">Pashto</option>
+        <option value="pt">Portuguese</option>
+        <option value="ro">Romanian</option>
+        <option value="ru">Russian</option>
+        <option value="sd">Sindhi</option>
+        <option value="si">Sinhala</option>
+        <option value="sk">Slovak</option>
+        <option value="sl">Slovenian</option>
+        <option value="sm">Samoan</option>
+        <option value="sn">Shona</option>
+        <option value="so">Somali</option>
+        <option value="sq">Albanian</option>
+        <option value="sr">Serbian</option>
+        <option value="st">Sesotho</option>
+        <option value="su">Sundanese</option>
+        <option value="sv">Swedish</option>
+        <option value="sw">Swahili</option>
+        <option value="ta">Tamil</option>
+        <option value="te">Telugu</option>
+        <option value="tg">Tajik</option>
+        <option value="th">Thai</option>
+        <option value="tl">Filipino</option>
+        <option value="tr">Turkish</option>
+        <option value="ug">Uyghur</option>
+        <option value="uk">Ukrainian</option>
+        <option value="ur">Urdu</option>
+        <option value="uz">Uzbek</option>
+        <option value="vi">Vietnamese</option>
+        <option value="xh">Xhosa</option>
+        <option value="yi">Yiddish</option>
+        <option value="yo">Yoruba</option>
+        <option value="ug">Chinese (hur</option>
+        <option value="zh-cn">Chinese (simplified)</option>
+        <option value="zh-tw">Chinese (traditional)</option>
+        <option value="zu">Zulu</option>
+    </select>
+
+    <p id="display-variable">Variable Value Will Appear Here</p>
+
+    <script>
+        var globalVariable = "en";
+        function changeVariable(selectedValue) {
+            // Here you can perform any action you want based on the selected option
+            document.getElementById("display-variable").innerText = "Language : " + selectedValue;
+            // You can also perform other actions or update other variables based on the selected option
+            globalVariable = selectedValue;
+        }
+    </script>
+    <div id="chatbox">
+        <!-- Messages will be added here -->
+    </div>
+    <input id="userInput" type="text" placeholder="Type a message...">
+    <script>
+        // Add chatbot logic here
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('userInput');
+
+        function addMessage(message, className) {
+            const div = document.createElement('div');
+            div.classList.add('message', className);
+            div.textContent = message;
+            chatbox.appendChild(div);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+        }
+
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const userMessage = userInput.value.trim();
+                if (userMessage !== '' && userMessage[0] !== '.') {
+                    addMessage(userMessage, 'userMessage');
+                    // Add chatbot response logic here
+                    
+                    userInput.value = '';
+                }
+                if (userMessage !== '' && userMessage[0] == ".") {
+                    //addMessage(userMessage, 'userMessage');
+                    // Add chatbot response logic here
+                    const data = JSON.stringify({
+                        text_to_translate: userMessage.slice(1),
+                        dest: globalVariable
+                    });
+                    
+                    const xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+                    
+                    xhr.addEventListener('readystatechange', function () {
+                        if (this.readyState === this.DONE) {
+                            const data = JSON.parse(this.response);
+                            const x = data.translation;
+                            addMessage(x, 'botMessage');
+                        }
+                    });
+                    
+                    xhr.open('POST', 'https://google-translate-v21.p.rapidapi.com/translate');
+                    xhr.setRequestHeader('content-type', 'application/json');
+                    xhr.setRequestHeader('X-RapidAPI-Key', 'd6a15790e6msh0376cb7d6dbf755p17875fjsne8acb8137f40');
+                    xhr.setRequestHeader('X-RapidAPI-Host', 'google-translate-v21.p.rapidapi.com');
+                    
+                    xhr.send(data);
+                    
+                    userInput.value = '';
+                }
+            }
+        })
+        chatbox.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const userMessage = userInput.value.trim();
+                if (userMessage !== '') {
+                    addMessage(userMessage, 'userMessage');
+                    // Add chatbot response logic here
+                    addMessage('Chatbot: Hello! How can I help you?', 'botMessage');
+                    userInput.value = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
